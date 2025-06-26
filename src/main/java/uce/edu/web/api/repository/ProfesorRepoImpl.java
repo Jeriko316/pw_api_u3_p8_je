@@ -1,8 +1,11 @@
 package uce.edu.web.api.repository;
 
+import java.util.List;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import uce.edu.web.api.repository.modelo.Profesor;
 
@@ -17,6 +20,12 @@ public class ProfesorRepoImpl implements IProfesorRepo {
     public Profesor seleccionarPorId(Integer id) {
         // TODO Auto-generated method stub
         return this.entityManager.find(Profesor.class, id);
+    }
+
+    @Override
+    public List<Profesor> seleccionarTodos() {
+        TypedQuery <Profesor> mQuery = this.entityManager.createQuery("SELECT p FROM Profesor p", Profesor.class);
+        return mQuery.getResultList();
     }
 
 }

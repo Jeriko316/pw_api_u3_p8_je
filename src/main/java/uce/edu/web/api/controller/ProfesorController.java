@@ -1,5 +1,7 @@
 package uce.edu.web.api.controller;
 
+import java.util.List;
+
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -18,5 +20,15 @@ public class ProfesorController {
     public Profesor buscarPorId(@PathParam("id") Integer id){
         return this.profesorService.buscarPorId(id);
     }
+
+    @GET
+    @Path("")
+    public List<Profesor> buscarTodos(){
+        return this.profesorService.buscarTodos();
+    }
+
+   
+
+
 
 }
