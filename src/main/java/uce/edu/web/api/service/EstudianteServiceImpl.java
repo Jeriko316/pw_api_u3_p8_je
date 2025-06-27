@@ -10,19 +10,38 @@ import uce.edu.web.api.repository.modelo.Estudiante;
 @ApplicationScoped
 public class EstudianteServiceImpl implements IEstudianteService {
 
-    @Inject
+  @Inject
     private IEstudianteRepo estudianteRepo;
-
+ 
     @Override
     public Estudiante buscarPorId(Integer id) {
-        // TODO Auto-generated method stub
         return this.estudianteRepo.seleccionarPorId(id);
     }
-
+ 
     @Override
     public List<Estudiante> buscarTodos() {
-        // TODO Auto-generated method stub
-       return this.estudianteRepo.seleccionarTodos();
+        return this.estudianteRepo.seleccionarTodos();
     }
+ 
+    @Override
+    public void actualizarPorId(Estudiante estudiante) {
+        this.estudianteRepo.actualizarPorId(estudiante);
+    }
+ 
+    @Override
+    public void actualizarParcialPorId(Estudiante estudiante) {
+        this.estudianteRepo.actualizarParcialPorId(estudiante);
+    }
+ 
+    @Override
+    public void borrarPorId(Integer id) {
+        this.estudianteRepo.borrarPorId(id);
+    }
+ 
+    @Override
+    public void guardar(Estudiante estudiante) {
+        this.estudianteRepo.insertar(estudiante);
+    }
+   
 
 }
