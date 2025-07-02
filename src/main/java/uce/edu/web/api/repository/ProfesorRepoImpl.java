@@ -28,4 +28,27 @@ public class ProfesorRepoImpl implements IProfesorRepo {
         return mQuery.getResultList();
     }
 
+    @Override
+    public void actualizarPorId(Profesor profesor) {
+       this.entityManager.merge(profesor);
+    }
+
+    @Override
+    public void actualizarParcialPorId(Profesor profesor) {
+        // TODO Auto-generated method stub
+        this.entityManager.merge(profesor);
+    }
+
+    @Override
+    public void borrarPorId(Integer id) {
+        // TODO Auto-generated method stub
+        this.entityManager.remove(this.seleccionarPorId(id));
+    }
+
+    @Override
+    public void insertar(Profesor profesor) {
+        // TODO Auto-generated method stub
+        this.entityManager.persist(profesor);
+    }
+
 }
