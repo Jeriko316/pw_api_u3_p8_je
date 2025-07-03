@@ -2,74 +2,70 @@ package uce.edu.web.api.controller;
 
 import java.util.List;
 
-import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
-
 import jakarta.inject.Inject;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.PATCH;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import uce.edu.web.api.repository.modelo.Profesor;
 import uce.edu.web.api.service.IProfesorService;
 
 @Path("/profesores")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class ProfesorController {
 
     @Inject
     private IProfesorService profesorService;
 
     @GET
-    @Path("/consultar/{id}")
-    public Profesor buscarPorId(@PathParam("id") Integer id){
-        return this.profesorService.buscarPorId(id);
+    public Response buscarTodos(@QueryParam("genero") String genero) {
+        List<Profesor> profesores = this.profesorService.buscarTodos(genero);
+        return Response.ok(profesores).build();
     }
 
     @GET
-    @Path("")
-    public List<Profesor> buscarTodos(){
-        return this.profesorService.buscarTodos();
+    @Path("/{id}")
+    public Response buscarPorId(@PathParam("id") Integer id) {
+        Profesor profesor = this.profesorService.buscarPorId(id);
+        if (profesor == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(profesor).build();
     }
 
     @POST
-    @Path("")
-    public void guardar(@RequestBody Profesor profesor){
+    public Response guardar(Profesor profesor) {
         this.profesorService.guardar(profesor);
+        return Response.status(Response.Status.CREATED).build();
     }
-
 
     @PUT
     @Path("/{id}")
-    public void actualizarPorId(@RequestBody Profesor profesor , @PathParam("id") Integer id){
+    public Response actualizarPorId(@PathParam("id") Integer id, Profesor profesor) {
         profesor.setId(id);
         this.profesorService.actualizarPorId(profesor);
+        return Response.noContent().build();
     }
 
     @PATCH
-    @Path("{id}")
-    public void actualizarParcialPorId(@RequestBody Profesor profesor, @PathParam("id") Integer id){
+    @Path("/{id}")
+    public Response actualizarParcialPorId(@PathParam("id") Integer id, Profesor profesor) {
         profesor.setId(id);
         Profesor p = this.profesorService.buscarPorId(id);
-        if(profesor.getApellido() != null){
-            p.setApellido(profesor.getApellido());
+        if (p == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-
-        if(profesor.getNombre() != null){
-            p.setNombre(profesor.getNombre());
-        }
-
-        if(profesor.getCedula() != null){
-            p.setCedula(profesor.getCedula());
-        }
+        if (profesor.getApellido() != null) p.setApellido(profesor.getApellido());
+        if (profesor.getNombre() != null) p.setNombre(profesor.getNombre());
+        if (profesor.getCedula() != null) p.setCedula(profesor.getCedula());
         this.profesorService.actualizarParcialPorId(p);
+        return Response.noContent().build();
     }
 
- @DELETE
+    @DELETE
     @Path("/{id}")
-    public void borrarPorId(@PathParam("id") Integer id) {
+    public Response borrarPorId(@PathParam("id") Integer id) {
         this.profesorService.borrarPorId(id);
+        return Response.noContent().build();
     }
-
 }

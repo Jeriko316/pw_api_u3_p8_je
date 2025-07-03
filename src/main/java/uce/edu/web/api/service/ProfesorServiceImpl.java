@@ -21,9 +21,9 @@ public class ProfesorServiceImpl implements IProfesorService{
     }
 
     @Override
-    public List<Profesor> buscarTodos() {
+    public List<Profesor> buscarTodos(String genero) {
         // TODO Auto-generated method stub
-        return this.profesorRepo.seleccionarTodos();
+        return this.profesorRepo.seleccionarTodos(genero);
     }
 
     @Override

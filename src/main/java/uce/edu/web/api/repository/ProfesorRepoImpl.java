@@ -23,7 +23,7 @@ public class ProfesorRepoImpl implements IProfesorRepo {
     }
 
     @Override
-    public List<Profesor> seleccionarTodos() {
+    public List<Profesor> seleccionarTodos(String genero) {
         TypedQuery <Profesor> mQuery = this.entityManager.createQuery("SELECT p FROM Profesor p", Profesor.class);
         return mQuery.getResultList();
     }

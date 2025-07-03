@@ -10,6 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+
+
 @Entity
 @Table(name = "estudiante")
 public class Estudiante {
@@ -25,6 +27,7 @@ public class Estudiante {
     @Column(name = "estu_apellido")
     private String apellido;
     
+
     @Column(name = "estu_fecha_nacimiento")
     private LocalDateTime fechaNacimiento;
 

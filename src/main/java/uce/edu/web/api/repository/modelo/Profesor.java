@@ -30,6 +30,9 @@ public class Profesor {
      @Column(name = "prof_salario")
     private BigDecimal salario;
 
+     @Column(name = "prof_genero")
+    private String genero; // Nuevo atributo
+
 
     //SET AND GETTERS
      public Integer getId() {
@@ -70,6 +73,14 @@ public class Profesor {
 
      public void setSalario(BigDecimal salario) {
          this.salario = salario;
+     }
+
+     public String getGenero() {
+         return genero;
+     }
+
+     public void setGenero(String genero) {
+         this.genero = genero;
      }
 
 
