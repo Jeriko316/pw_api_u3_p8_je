@@ -41,10 +41,10 @@ public class ProfesorServiceImpl implements IProfesorService {
         this.profesorRepo.borrarPorId(id);
     }
 
-    @Override
+  /*  @Override
     public ProfesorTo buscarPorId(Integer id, UriInfo uriInfo) {
         Profesor profesor = this.profesorRepo.seleccionarPorId(id);
         if (profesor == null) return null;
         return ProfesorMapper.toTo(profesor); // Pasa uriInfo si tu TO lo necesita
-    }
+    }*/ 
 }

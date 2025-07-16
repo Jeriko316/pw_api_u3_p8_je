@@ -1,6 +1,7 @@
 package uce.edu.web.api.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
@@ -48,7 +49,7 @@ public class EstudianteController extends BaseControlador {
         List<EstudianteTo> lista = this.estudianteService.buscarTodos(genero)
             .stream()
             .map(EstudianteMapper::toTo)
-            .toList();
+            .collect(Collectors.toList());
         return Response.status(Response.Status.OK).entity(lista).build();
     }
 
@@ -64,7 +65,7 @@ public class EstudianteController extends BaseControlador {
 
     @PUT
     @Path("/{id}")
-    public void actualizar(@PathParam("id") Integer id, @RequestBody EstudianteTo estudianteTo) {
+    public void actualizarPorId(@PathParam("id") Integer id, @RequestBody EstudianteTo estudianteTo) {
         var estudiante = EstudianteMapper.toEntity(estudianteTo);
         estudiante.setId(id);
         this.estudianteService.actualizarPorId(estudiante);
@@ -74,20 +75,11 @@ public class EstudianteController extends BaseControlador {
     @Path("/{id}")
     public void actualizarParcialPorId(@PathParam("id") Integer id, @RequestBody EstudianteTo estudianteTo) {
         estudianteTo.setId(id);
-        Estudiante e = this.estudianteService.buscarPorId(id);
-        if (estudianteTo.getNombre() != null) {
-            e.setNombre(estudianteTo.getNombre());
+        EstudianteTo eTo = EstudianteMapper.toTo(this.estudianteService.buscarPorId(id));
+        if(estudianteTo.getApellido() != null){
+            eTo.setApellido(estudianteTo.getApellido());
         }
-        if (estudianteTo.getApellido() != null) {
-            e.setApellido(estudianteTo.getApellido());
-        }
-        if (estudianteTo.getFechaNacimiento() != null) {
-            e.setFechaNacimiento(estudianteTo.getFechaNacimiento());
-        }
-        if (estudianteTo.getGenero() != null) {
-            e.setGenero(estudianteTo.getGenero());
-        }
-        this.estudianteService.actualizarParcialPorId(e);
+        this.estudianteService.actualizarParcialPorId(EstudianteMapper.toEntity(eTo));
     }
 
     @DELETE

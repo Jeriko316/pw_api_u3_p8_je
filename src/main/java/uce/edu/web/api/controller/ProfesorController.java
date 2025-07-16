@@ -24,7 +24,7 @@ public class ProfesorController {
     @Inject
     private IProfesorService profesorService;
 
-    @GET
+   /*  @GET
     @Path("/{id}")
     public Response consultarPorId(@PathParam("id") Integer id, @Context UriInfo uriInfo) {
         ProfesorTo prof = ProfesorMapper.toTo(this.profesorService.buscarPorId(id));
@@ -89,5 +89,5 @@ public class ProfesorController {
     @Path("/{id}")
     public void borrarPorId(@PathParam("id") Integer id) {
         this.profesorService.borrarPorId(id);
-    }
+    }*/
 }

@@ -7,7 +7,7 @@ import uce.edu.web.api.repository.modelo.Profesor;
 import uce.edu.web.api.service.to.ProfesorTo;
 
 public interface IProfesorService {
-    public ProfesorTo buscarPorId(Integer id, UriInfo uriInfo);
+  //  public ProfesorTo buscarPorId(Integer id, UriInfo uriInfo);
     public List<Profesor> buscarTodos(String genero);
     
     public void actualizarPorId(Profesor profesor);

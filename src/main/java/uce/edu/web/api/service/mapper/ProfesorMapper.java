@@ -9,15 +9,15 @@ import uce.edu.web.api.service.to.ProfesorTo;
 
 public class ProfesorMapper {
 
-    public static ProfesorTo toTo(Profesor profesor) {
+    /*public static ProfesorTo toTo(ProfesorTo profesor) {
         if (profesor == null) return null;
         // Puedes pasar null en uriInfo si no lo necesitas, o agregarlo en el controlador
         return new ProfesorTo(
-            profesor.getId(),
+            profesorTo.getId(),
             profesor.getNombre(),
-            profesor.getApellido(),
+            profesorTo.getApellido(),
             profesor.getCedula(),
-            profesor.getSalario(),
+            profesorTo.getSalario(),
             profesor.getGenero(),
             null // El controlador puede pasar el UriInfo real si lo requiere
         );
@@ -48,5 +48,5 @@ public class ProfesorMapper {
             ));
         }
         return resultList;
-    }
+    }*/
 }
